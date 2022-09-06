@@ -3,17 +3,17 @@ import { faArrowLeft, faArrowRight, faBookmark, faChevronRight, faEnvelopeOpen, 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import React from 'react'
-import { useParams } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import BASE_URL, { axiosQuery } from '@ui-services/api';
 import HtmlDecoder from '../components/HtmlDecoder';
 import { IPostEntity } from '../interfaces/Post';
 import { samplePost } from '../utils/postSample';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { axiosQuery } from 'services/api';
 
 const SinglePost = () => {
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<string>('');
-    const { slug } = useParams()
+    // const { slug } = useRouter()
     const [post, setPost] = React.useState<IPostEntity>(
         samplePost
     )
@@ -21,7 +21,7 @@ const SinglePost = () => {
         try {
 
             setLoading(true)
-            const res = await axiosQuery.get(`/${slug}`)
+            const res = await axiosQuery.get(`/`)
             setPost(res.data)
             setError('')
             setLoading(false)
@@ -44,7 +44,7 @@ const SinglePost = () => {
 
                 </div>
                 <div className='w-full h-96 relative'>
-                    <img src={post.featured_image} alt="" className='absolute h-full w-full  object-cover' />
+                    <Image src={post.featured_image} alt="" className='absolute h-full w-full  object-cover' />
 
                 </div>
                 <div className='py-2 text-[.85rem] flex items-center gap-2'>
@@ -56,7 +56,7 @@ const SinglePost = () => {
                 </div>
                 <div className='border my-3 flex gap-2'>
                     <div className='w-2/5 h-full bg-gray-300 p-4'>
-                        <img src={'/user.svg'} alt="" className='w-full h-1/2' />
+                        <Image src={'/user.svg'} alt="" className='w-full h-1/2' />
                         <div className='text-[.85rem]'>
                             <span>{`${post.authors.first_name} ${post.authors.last_name}`}</span>
                         </div>
@@ -78,7 +78,7 @@ const SinglePost = () => {
             <div>
                 {/* Ad 1 */}
                 <div className="w-80 h-64 mx-auto relative">
-                    <img
+                    <Image
                         src={"/transport.webp"}
                         alt=""
                         className="absolute w-full h-full -z-[1] object-cover"

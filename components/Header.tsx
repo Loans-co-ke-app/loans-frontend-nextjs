@@ -15,8 +15,8 @@ import {
   faYoutube,
 } from "@fortawesome/free-brands-svg-icons";
 import moment from "moment";
-import useNavLinks from "../hooks/useNavLinks";
-import { Link } from "react-router-dom";
+import Link from "next/link";
+import useNavLinks from "hooks/useNavlinks";
 
 const Header = () => {
   const header1Ref = React.useRef<HTMLDivElement>(null);
@@ -139,14 +139,14 @@ const Header = () => {
                     <ul className="hidden flex-col gap-4 justify-center absolute group-hover:flex border top-[calc(100%_+_2px)] bg-white min-w-[10rem] w-full z-10 rounded-sm">
                       {item.children.map((child) => (
                         <li key={child.name} className="flex items-center px-2 py-2 text-purple-600 text-left hover:bg-orange-300">
-                         <Link to={child.url} >{child.name}</Link>
+                         <Link href={child.url} >{child.name}</Link>
                         </li>
                       ))}
                     </ul>
                   </li>
                 ) : (
                   <li key={item.name} className="text-center py-2 hover:border-b">
-                    <Link to={item.url}>{item.name}</Link>
+                    <Link href={item.url}>{item.name}</Link>
                   </li>
                 )
               )}

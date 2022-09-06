@@ -10,9 +10,10 @@ import {
   import posts from "../data/blogs.json";
   import React from "react";
   import moment from "moment";
-  import { Link, useNavigate } from "react-router-dom";
   import { IPostEntity } from "../interfaces/Post";
   import HtmlDecoder from "./HtmlDecoder";
+import Image from "next/image";
+import Link from "next/link";
   
   const HomeNews = ({ posts }: { posts: IPostEntity[] }) => {
     const [leftPosts, setLeftPosts] = React.useState<IPostEntity[]>([]);
@@ -41,10 +42,10 @@ import {
             <div className="p-2">
               <ul>
                 {leftPosts.map((post) => (
-                  <Link key={post.article_title} to={`/post/${post.slug}`}>
+                  <Link key={post.article_title} href={`/post/${post.slug}`}>
                     <div className="flex flex-col gap-3">
                       <div className="relative shadow-md h-48">
-                        <img
+                        <Image
                           src={post.featured_image}
                           alt=""
                           className="w-full absolute h-full object-cover -z-[1]"
@@ -54,8 +55,8 @@ import {
                           <div className="w-full flex items-center justify-between">
                             {/* left */}
                             <div>
-                              {post.tags?.split(",").map((tag) => (
-                                <span className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
+                              {post.tags?.split(",").map((tag,index) => (
+                                <span key={tag+index} className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
                                   {tag}
                                 </span>
                               ))}
@@ -106,10 +107,10 @@ import {
             <div className="p-2">
               <ul>
                 {rightPosts.map((post) => (
-                  <Link key={post.article_title} to={`post/${post.slug}`}>
+                  <Link key={post.article_title} href={`post/${post.slug}`}>
                     <div className="flex flex-col gap-3">
                       <div className="relative shadow-md h-48">
-                        <img
+                        <Image
                           src={post.featured_image}
                           alt=""
                           className="w-full absolute h-full object-cover -z-[1]"
@@ -119,8 +120,8 @@ import {
                           <div className="w-full flex items-center justify-between">
                             {/* left */}
                             <div>
-                            {post.tags?.split(",").map((tag) => (
-                                <span className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
+                            {post.tags?.split(",").map((tag,index) => (
+                                <span key={tag+index} className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
                                   {tag}
                                 </span>
                               ))}
@@ -160,7 +161,7 @@ import {
         <div>
           {/* Ad 1 */}
           <div className="w-80 h-64 mx-auto relative">
-            <img
+            <Image
               src={"/transport.webp"}
               alt=""
               className="absolute w-full h-full -z-[1] object-cover"
@@ -203,7 +204,7 @@ import {
               {posts.slice(0, 3).map((item, index) => (
                 <li key={index} className="flex items-center gap-3">
                   <div className="w-full h-24 md:w-24 relative">
-                    <img
+                    <Image
                       src={item.featured_image}
                       alt=""
                       className="w-full h-full object-cover absolute"

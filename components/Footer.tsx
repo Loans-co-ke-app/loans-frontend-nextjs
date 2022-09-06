@@ -19,8 +19,8 @@ import {
   } from "@fortawesome/free-solid-svg-icons";
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
   import moment from "moment";
+import Link from "next/link";
   import React from "react";
-  import { Link } from "react-router-dom";
   
   const Footer = () => {
     return (
@@ -39,7 +39,7 @@ import {
               facilis at totam.
               <br />
               <Link
-                to={"/"}
+                href={"/"}
                 className="text-blue-400 flex items-center gap-2 p-1 hover:text-gray-500 transition duration-300 ease-in text-[.8rem]"
               >
                 Read more <FontAwesomeIcon icon={faChevronRight} />

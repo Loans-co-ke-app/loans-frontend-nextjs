@@ -2,12 +2,12 @@ import { faHouse, faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { axiosQuery } from "services/api";
 import { IPostEntity } from "@ui-interfaces/Post";
 import { samplePost } from "@ui-utils/postSample";
 import HomeEditorsFeaturedBlog from "./HomeEditorsFeaturedBlog";
+import Image from "next/image";
+import Link from "next/link";
 
 
 const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
@@ -16,10 +16,6 @@ const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
     const response = await axiosQuery.get('/article_featured/')
     setFeaturedArticle(response.data[0])
 
-  }
-  const navigate = useNavigate()
-  const navigateUrl = (url: string) => {
-    navigate(url)
   }
   React.useEffect(() => {
     fetchFeaturedPost()
@@ -38,7 +34,7 @@ const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
       </div>
       {/* End of bread crumb */}
       <div>
-        <img src="" alt="" />
+        <Image src="" alt="" />
       </div>
       {/* Landing */}
       <div className="flex flex-col md:flex-row gap-2 p-2">
@@ -50,8 +46,8 @@ const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
         </ul>
         {/* end of left section */}
         {/*  Featured image*/}
-        <Link to={`post/${featuredArticle.slug}`} className="relative w-full md:w-6/12 h-[24.5rem]">
-          <img
+        <Link href={`post/${featuredArticle.slug}`} className="relative w-full md:w-6/12 h-[24.5rem]">
+          <Image
             src={featuredArticle?.featured_image}
             alt=""
             className="absolute h-full w-full object-cover -z-[1]"
@@ -61,8 +57,8 @@ const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
             <div className="w-full flex items-center justify-between">
               {/* left */}
               <div>
-                {featuredArticle.tags?.split(",").map((tag) => (
-                  <span className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
+                {featuredArticle.tags?.split(",").map((tag,index) => (
+                  <span key={tag+index} className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
                     {tag}
                   </span>
                 ))}

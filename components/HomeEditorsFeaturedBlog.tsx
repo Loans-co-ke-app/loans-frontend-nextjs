@@ -2,20 +2,15 @@ import { faBookmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import moment from "moment";
 import React from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import BASE_URL from "@ui-services/api";
 import { IPostEntity } from "../interfaces/Post";
+import Image from "next/image";
+import Link from "next/link";
 
 const HomeEditorsFeaturedBlog = (post: IPostEntity) => {
-  const navigate = useNavigate()
-  const navigateUrl = (url: string) => {
-    navigate('post' + '/' + url)
-  }
   return (
-    <Link to={`/post/${post.slug}`} key={post.slug} className="relative shadow-md h-48 cursor-pointer" onClick={e => {
+    <Link href={`/post/${post.slug}`} key={post.slug} className="relative shadow-md h-48 cursor-pointer" onClick={e => {
     }}>
-      <img
+      <Image
         src={post.featured_image}
         alt=""
         className="w-full absolute h-full object-cover -z-[1]"
@@ -25,8 +20,8 @@ const HomeEditorsFeaturedBlog = (post: IPostEntity) => {
         <div className="w-full flex items-center justify-between">
           {/* left */}
           <div>
-            {post.tags?.split(",").map((tag) => (
-              <span className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
+            {post.tags?.split(",").map((tag,index) => (
+              <span key={tag+index} className="bg-purple-500 text-white px-1 uppercase text-[.75rem]">
                 {tag}
               </span>
             ))}
