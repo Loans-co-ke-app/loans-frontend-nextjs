@@ -22,7 +22,7 @@ import Link from "next/link";
   
     React.useEffect(() => {
       setLeftPosts(posts!.slice(0, 2));
-      setRightPosts(posts!.slice(2, 4));
+      setRightPosts(posts!.slice(3, 4));
     }, [posts])
     return (
       <div className="grid md:grid-cols-[2fr_1fr] mt-4">
@@ -48,6 +48,7 @@ import Link from "next/link";
                         <Image
                           src={post.featured_image}
                           alt=""
+                          layout="fill"
                           className="w-full absolute h-full object-cover -z-[1]"
                         />
                         <div className="h-full w-full z-10 bg-slate-600 bg-opacity-20 p-2 flex flex-col justify-between text-white hover:bg-gradient-to-t hover:from-gray-400 hover:via-gray-400/25 hover:to-purple-gray-400/25 transition duration-500">
@@ -113,6 +114,7 @@ import Link from "next/link";
                         <Image
                           src={post.featured_image}
                           alt=""
+                          layout="fill"
                           className="w-full absolute h-full object-cover -z-[1]"
                         />
                         <div className="h-full w-full z-10 bg-slate-600 bg-opacity-20 p-2 flex flex-col justify-between text-white hover:bg-gradient-to-t hover:from-gray-400 hover:via-gray-400/25 hover:to-purple-gray-400/25 transition duration-500">
@@ -164,6 +166,7 @@ import Link from "next/link";
             <Image
               src={"/transport.webp"}
               alt=""
+              layout="fill"
               className="absolute w-full h-full -z-[1] object-cover"
             />
             <div className="w-full h-full z-10 bg-gray-600 bg-opacity-50 flex items-center justify-center">
@@ -207,6 +210,8 @@ import Link from "next/link";
                     <Image
                       src={item.featured_image}
                       alt=""
+                      layout="fill"
+                      loading="lazy"
                       className="w-full h-full object-cover absolute"
                     />
                   </div>
