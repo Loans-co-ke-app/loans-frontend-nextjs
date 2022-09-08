@@ -5,28 +5,38 @@ import React from 'react'
 // import { axiosQuery } from '@ui-services/api'
 import HomeFeaturedPost from '@ui-components/HomeFeaturedPost'
 import HomeNews from '@ui-components/HomeNews'
+import { axiosQuery } from 'services/api'
+import { IPostEntity } from '@ui-interfaces/Post'
+import BaseLayout from 'layouts/BaseLayout'
 
-export default function Home() {
-  const [posts, setPosts] = React.useState<any[]>([])
+type HomeProps = {
+  posts: IPostEntity[]
+}
+
+export default function Home({ posts }: HomeProps) {
+  // const [posts, setPosts] = React.useState<any[]>([])
 
 
   const fetchPosts = async () => {
-    //   const response = await axiosQuery.get('')
-    //   setPosts(response.data)
-    //   console.log(response.data);
-    // }
-    // React.useEffect(() => {
-    //   fetchPosts()
-    // } , [])
-  }
-    return (
-      <div>
-        {/* <HomeFeaturedPost posts={posts!} />
-      <HomeNews  posts={posts}/> */}
-        <div>
-          <h1>Hello from loans.ke</h1>
-        </div>
-      </div>
-    );
-  }
 
+  }
+  return (
+    <div>
+      {/* <HomeFeaturedPost posts={posts!} /> */}
+      <HomeNews posts={posts} />
+
+    </div>
+  );
+}
+
+Home.getLayout = (page: React.ReactElement) => (
+  <BaseLayout title="Loans homepage">{page}</BaseLayout>
+);
+
+export async function getServerSideProps(context: any) {
+  const response = await axiosQuery.get('/')
+  const posts: IPostEntity[] = response.data
+  return {
+    props: { posts }, // will be passed to the page component as props
+  }
+}

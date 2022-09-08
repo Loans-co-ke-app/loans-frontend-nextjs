@@ -56,7 +56,7 @@ const SinglePost = () => {
                 </div>
                 <div className='border my-3 flex gap-2'>
                     <div className='w-2/5 h-full bg-gray-300 p-4'>
-                        <Image src={'/user.svg'} alt="" className='w-full h-1/2' />
+                        <Image src={'/user.svg'} alt="" layout='fill' className='w-full h-1/2' />
                         <div className='text-[.85rem]'>
                             <span>{`${post.authors.first_name} ${post.authors.last_name}`}</span>
                         </div>

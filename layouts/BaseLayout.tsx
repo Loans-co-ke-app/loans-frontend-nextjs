@@ -1,3 +1,5 @@
+import Footer from '@ui-components/Footer';
+import Header from '@ui-components/Header';
 import Head from 'next/head';
 import React from 'react';
 
@@ -16,9 +18,11 @@ const BaseLayout = ({ children, title }: Props) => {
 				</title>
 			</Head>
 
-			<main className="max-w-[1440px] mx-auto bg-slate-100">
-				{children}
-			</main>
+			<Header />
+			<div className="max-w-7xl mx-auto min-h-screen">
+				<div className="w-full px-2">{children}</div>
+			</div>
+			<Footer />
 		</React.Fragment>
 	);
 };

@@ -46,10 +46,15 @@ const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
         </ul>
         {/* end of left section */}
         {/*  Featured image*/}
-        <Link href={`post/${featuredArticle.slug}`} className="relative w-full md:w-6/12 h-[24.5rem]">
+        <Link href={`post/${featuredArticle.slug}`} >
+          <div className="relative w-full md:w-6/12 h-[24.5rem]">
+
           <Image
             src={featuredArticle?.featured_image}
             alt=""
+            loading="lazy"
+            layout="fill"
+            // priority
             className="absolute h-full w-full object-cover -z-[1]"
           />
           <div className="h-full w-full z-10 bg-slate-600 bg-opacity-20 p-2 flex flex-col justify-between text-white hover:bg-gradient-to-t hover:from-gray-400 hover:via-gray-400/25 hover:to-purple-gray-400/25 transition duration-500">
@@ -76,6 +81,7 @@ const HomeFeaturedPost = ({ posts }: { posts: IPostEntity[] }) => {
               </div>
               <h3 className="text-4xl ">{featuredArticle!.article_title}</h3>
             </div>
+          </div>
           </div>
         </Link>
         {/* right section */}
