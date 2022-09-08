@@ -33,7 +33,7 @@ import Link from "next/link";
               <h1 className="font-bold text-lg">About us</h1>
               <FontAwesomeIcon icon={faInfo} />
             </div>
-            <p>
+            <div>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
               obcaecati laudantium maxime deserunt, earum quos aut possimus
               facilis at totam.
@@ -46,7 +46,7 @@ import Link from "next/link";
                Read more <FontAwesomeIcon icon={faChevronRight} />
                </div>
               </Link>
-            </p>
+            </div>
             <ul className="border-t py-2">
               <li className="flex items-center gap-2">
                 <FontAwesomeIcon icon={faLocationArrow} />{" "}
