@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const HomeEditorsFeaturedBlog = (post: IPostEntity) => {
-  console.log(post.slug, "Slug");
 
   return (
     <Link href={`/post/${post.slug}`} key={post.article_title} >

@@ -3,38 +3,43 @@ import { faArrowLeft, faArrowRight, faBookmark, faChevronRight, faEnvelopeOpen, 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import moment from 'moment';
 import React from 'react'
-import HtmlDecoder from '../components/HtmlDecoder';
-import { IPostEntity } from '../interfaces/Post';
-import { samplePost } from '../utils/postSample';
+import HtmlDecoder from '../../components/HtmlDecoder';
+import { IPostEntity } from '../../interfaces/Post';
+import { samplePost } from '../../utils/postSample';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { axiosQuery } from 'services/api';
+import BaseLayout from 'layouts/BaseLayout';
 
-const SinglePost = () => {
+type SinglePostProps = {
+    post:IPostEntity
+}
+const SinglePost = ({post}:SinglePostProps
+    ) => {
     const [loading, setLoading] = React.useState<boolean>(true);
     const [error, setError] = React.useState<string>('');
     // const { slug } = useRouter()
-    const [post, setPost] = React.useState<IPostEntity>(
-        samplePost
-    )
-    const fetchPost = async () => {
-        try {
+    // const [post, setPost] = React.useState<IPostEntity>(
+    //     samplePost
+    // )
+    // const fetchPost = async () => {
+    //     try {
 
-            setLoading(true)
-            const res = await axiosQuery.get(`/`)
-            setPost(res.data)
-            setError('')
-            setLoading(false)
-        } catch (err: any) {
-            setError(err.response.data.message)
-            setLoading(false)
-        }
+    //         setLoading(true)
+    //         const res = await axiosQuery.get(`/`)
+    //         setPost(res.data)
+    //         setError('')
+    //         setLoading(false)
+    //     } catch (err: any) {
+    //         setError(err.response.data.message)
+    //         setLoading(false)
+    //     }
 
-    }
-    React.useEffect(() => {
-        fetchPost()
+    // }
+    // React.useEffect(() => {
+    //     fetchPost()
 
-    }, [])
+    // }, [])
 
     return (
         <div className="grid md:grid-cols-[2fr_1fr] mt-4">
@@ -44,7 +49,7 @@ const SinglePost = () => {
 
                 </div>
                 <div className='w-full h-96 relative'>
-                    <Image src={post.featured_image} alt="" className='absolute h-full w-full  object-cover' />
+                    <Image src={post.featured_image} alt="" layout='fill' className='absolute h-full w-full  object-cover' />
 
                 </div>
                 <div className='py-2 text-[.85rem] flex items-center gap-2'>
@@ -55,7 +60,7 @@ const SinglePost = () => {
                     {HtmlDecoder({ html: post.article_body })}
                 </div>
                 <div className='border my-3 flex gap-2'>
-                    <div className='w-2/5 h-full bg-gray-300 p-4'>
+                    <div className='w-2/5 h-full bg-gray-300 p-4 relative'>
                         <Image src={'/user.svg'} alt="" layout='fill' className='w-full h-1/2' />
                         <div className='text-[.85rem]'>
                             <span>{`${post.authors.first_name} ${post.authors.last_name}`}</span>
@@ -81,6 +86,7 @@ const SinglePost = () => {
                     <Image
                         src={"/transport.webp"}
                         alt=""
+                        layout='fill'
                         className="absolute w-full h-full -z-[1] object-cover"
                     />
                     <div className="w-full h-full z-10 bg-gray-600 bg-opacity-50 flex items-center justify-center">
@@ -145,7 +151,20 @@ const SinglePost = () => {
     );
 };
 
+SinglePost.getLayout = (page: React.ReactElement) => (
+    <BaseLayout title="Loans single post">{page}</BaseLayout>
+);
 
+export async function getServerSideProps(context: any) {
+    const slug = context.params.slug
+    const response = await axiosQuery.get(`/${slug}`)
+    const data = response.data
+    return {
+        props: {
+            post: data
+        }
+    }
 
+}
 
 export default SinglePost

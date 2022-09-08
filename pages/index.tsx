@@ -22,7 +22,7 @@ export default function Home({ posts }: HomeProps) {
   }
   return (
     <div>
-      {/* <HomeFeaturedPost posts={posts!} /> */}
+      <HomeFeaturedPost posts={posts!} />
       <HomeNews posts={posts} />
 
     </div>
